@@ -1,11 +1,10 @@
-// Online Go compiler to run Golang program online
-// Print "Hello World!" message
-
 package main
 
-import ("fmt"
-"strings"
+import (
+    "fmt"
+    "strings"
 )
+
 func userMessage(users []string, printer func(string, string)) {
     for _, value := range users { // Use _ to ignore the index
         printer(value, " Welcome") // Add a space before "Welcome"
@@ -16,17 +15,17 @@ func greeting(user string, message string) {
     fmt.Println(user + message) // Use + to concatenate strings
 }
 
-func welcome() (string, string)(string, int) {
+func welcome() (string, int) {
     users := []string{"ABHIL", "AKHIL", "BINIL", "ROHIT"}
     userMessage(users, greeting)
-    return "SUCCESS", 10;
+    return "SUCCESS", 10
 }
 
-
 func variablesAndFunctions() {
-     fmt.Print("\n----------------     VARIABLES    ---------------- \n ")
-     operationStatus, operationValue := welcome()
-     fmt.Println("value after calling functions", operationStatus, operationValue)
+    fmt.Print("\n----------------     VARIABLES    ---------------- \n ")
+    operationStatus, operationValue := welcome()
+    fmt.Println("value after calling functions", operationStatus, operationValue)
+
     // strings
     var nameOne string = "ABHIL"
 
@@ -36,25 +35,21 @@ func variablesAndFunctions() {
 	var nameTwo = "K V" // type will be asigned dynamically
 
 	nameFour := "Ahul" //  short hand of writing without var , can't be used outside of functions
-	
-		fmt.Println("string ", nameOne, nameTwo, nameThree, nameFour)
-		
-	// integer
-	var age int = 10000
-	
-	var age2 int
-	age2 = 20
-	
-	var age3 = 30
-	
-	age4 := 40
-	
-		fmt.Println("integer", age, age2, age3, age4)
-		
-	// boolean
-	var trueValue bool = true
-	    fmt.Println(trueValue)
 
+    fmt.Println("string ", nameOne, nameTwo, nameThree, nameFour)
+
+    // integer
+    var age int = 10000
+    var age2 int
+    age2 = 20
+    var age3 = 30
+    age4 := 40
+
+    fmt.Println("integer", age, age2, age3, age4)
+
+    // boolean
+    var trueValue bool = true
+    fmt.Println(trueValue)
 }
 
 func printing() {
@@ -83,12 +78,12 @@ func arrayAndSlice() {
     fmt.Println(ages, len(ages), age2)
     age3[0] = "Test"
     fmt.Println(age3[0])
-    
+
     // slices
     scores := []int{20, 22, 32, 12}
     scores = append(scores, 34)
     fmt.Println("slices", scores[4])
-    
+
     // slice ranges
     test := scores[1:2]
     test2 := scores[2:]
@@ -99,7 +94,6 @@ func arrayAndSlice() {
 func sliceMethods() {
     fmt.Print("\n----------------     SLICE METHODS   ----------------  \n ")
     makeSlice := make([]int, 5, 10) // Creates a slice with length 5 and capacity 10
-
     mySlice := []int{1, 2, 3}
     appendData := append(mySlice, 4, 5) // "appendData" variable was missing
 
@@ -115,7 +109,7 @@ func sliceMethods() {
 }
 
 func stringMethods() {
-fmt.Print("\n----------------     STRING METHODS   ----------------  \n ")
+    fmt.Print("\n----------------     STRING METHODS   ----------------  \n ")
     s := "Hello, world!   "
     length := len(s)
     hasPrefix := strings.HasPrefix(s, "Hello")
@@ -132,7 +126,6 @@ fmt.Print("\n----------------     STRING METHODS   ----------------  \n ")
     join := strings.Join(split, ", ")
 
     fmt.Println(length, hasPrefix, hasSuffix, contains, index, lastOccurrence, replace, tolower, toupper, trim, split, join)
-    
 }
 
 func loops() {
@@ -140,37 +133,50 @@ func loops() {
     for i := 0; i < 5; i++ {
         fmt.Println(i)
     }
-    
+
     fmt.Println("------------")
     i := 6
     for i < 10 {
-        
         if i == 8 {
             break
         }
-        // if i == 7 {
+          // if i == 7 {
         //     continue
         // }
         fmt.Println(i)
         i++
     }
     fmt.Println("------------")
-    
-    numbers := []int{11,22,33,44,55,66,77,88,99}
+
+    numbers := []int{11, 22, 33, 44, 55, 66, 77, 88, 99}
     for index, value := range numbers {
         fmt.Println(index, value)
     }
-    
+
     fmt.Println("------------")
+
     // goto
     j := 10
-    loopLable:
+loopLabel:
     if j < 15 {
         fmt.Println(j)
         j++
-        goto loopLable
+        goto loopLabel
     }
-    
+}
+
+func updater(value *int) *int {
+    *value = *value + 1
+    return value
+}
+
+func pointers() {
+    fmt.Print("\n--------------    POINTERS      --------------\n")
+    var a int = 10
+    var ptr *int
+    ptr = &a
+    result := updater(&a)
+    fmt.Println(*ptr, *result)
 }
 
 func main() {
@@ -180,4 +186,5 @@ func main() {
     sliceMethods()
     stringMethods()
     loops()
+    pointers()
 }
