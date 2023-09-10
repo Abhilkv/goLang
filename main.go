@@ -5,6 +5,8 @@ package main
 
 import ("fmt"
 "strings"
+"bufio"
+ "os"
 )
 func userMessage(users []string, printer func(string, string)) {
     for _, value := range users { // Use _ to ignore the index
@@ -219,6 +221,44 @@ func structLogics() {
     fmt.Println("Full Name:", fullName)
 }
 
+func ReadInput() {
+    var x int
+    var y int
+    fmt.Print("ENter Number :")
+    fmt.Scan(&x)
+    fmt.Println(x)
+
+    // error handling on reading 
+    _, err := fmt.Scan(&y)
+    if err != nil {
+        fmt.Println("Error:", err)
+    } else {
+        fmt.Println("You entered:", y)
+    }
+
+    // looping 
+    var slice []int
+    for {
+        fmt.Print("Enter a positive integer: ")
+        _, err := fmt.Scan(&num)
+        if err == nil && num > 0 {
+            break
+        }
+        slice = append(slice, num) 
+        fmt.Println("Invalid input. Please try again.")
+    }
+    fmt.Println("You entered:", num)
+
+
+    // reading line of input 
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter a line of text: ")
+    userInput, _ := reader.ReadString('\n')
+    fmt.Println("You entered:", userInput)
+
+
+}
+
 
 
 func main() {
@@ -230,4 +270,5 @@ func main() {
     loops()
     pointersMain()
     structLogics()
+    ReadInput()
 }
