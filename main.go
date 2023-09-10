@@ -187,6 +187,40 @@ func pointersMain() {
 }
 
 
+// struct 
+type Address struct {
+    pin   int
+    house string
+}
+
+type Person struct {
+    firstName string
+    lastName  string
+    address   Address
+}
+
+func (p Person) StructMethod() string {
+    return p.firstName + " " + p.lastName
+}
+
+
+func structLogics() {
+    person := Person{
+        firstName: "John",
+        lastName:  "Doe",
+        address: Address{
+            pin:   12345,
+            house: "123 Main Street",
+        },
+    }
+
+    fmt.Println("inner", person.address.pin)
+    fullName := person.StructMethod()
+    fmt.Println("Full Name:", fullName)
+}
+
+
+
 func main() {
     printing()
     variablesAndFunctions()
@@ -195,4 +229,5 @@ func main() {
     stringMethods()
     loops()
     pointersMain()
+    structLogics()
 }
