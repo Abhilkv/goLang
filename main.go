@@ -173,6 +173,20 @@ func loops() {
     
 }
 
+func pointersSub(ptr3 *int) *int {
+    y := *ptr3 + 1
+    return &y
+}
+
+func pointersMain() {
+    x := 10
+    ptr := &x
+    ptr2 := pointersSub(ptr)
+    
+    fmt.Println("before", *ptr, *ptr2)
+}
+
+
 func main() {
     printing()
     variablesAndFunctions()
@@ -180,4 +194,5 @@ func main() {
     sliceMethods()
     stringMethods()
     loops()
+    pointersMain()
 }
