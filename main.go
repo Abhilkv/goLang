@@ -1,8 +1,9 @@
 package main
 
-import (
-    "fmt"
-    "strings"
+import ("fmt"
+"strings"
+"bufio"
+ "os"
 )
 
 func userMessage(users []string, printer func(string, string)) {
@@ -179,6 +180,162 @@ func pointers() {
     fmt.Println(*ptr, *result)
 }
 
+func pointersSub(ptr3 *int) *int {
+    y := *ptr3 + 1
+    return &y
+}
+
+func pointersMain() {
+    x := 10
+    ptr := &x
+    ptr2 := pointersSub(ptr)
+    
+    fmt.Println("before", *ptr, *ptr2)
+}
+
+
+// struct 
+type Address struct {
+    pin   int
+    house string
+}
+
+type Person struct {
+    firstName string
+    lastName  string
+    address   Address
+}
+
+func (p Person) StructMethod() string {
+    return p.firstName + " " + p.lastName
+}
+
+
+func structLogics() {
+    person := Person{
+        firstName: "John",
+        lastName:  "Doe",
+        address: Address{
+            pin:   12345,
+            house: "123 Main Street",
+        },
+    }
+
+    fmt.Println("inner", person.address.pin)
+    fullName := person.StructMethod()
+    fmt.Println("Full Name:", fullName)
+}
+
+func ReadInput() {
+    var x int
+    var y int
+    fmt.Print("ENter Number :")
+    fmt.Scan(&x)
+    fmt.Println(x)
+
+    // error handling on reading 
+    _, err := fmt.Scan(&y)
+    if err != nil {
+        fmt.Println("Error:", err)
+    } else {
+        fmt.Println("You entered:", y)
+    }
+
+    // looping 
+    var slice []int
+    for {
+        fmt.Print("Enter a positive integer: ")
+        _, err := fmt.Scan(&num)
+        if err == nil && num > 0 {
+            break
+        }
+        slice = append(slice, num) 
+        fmt.Println("Invalid input. Please try again.")
+    }
+    fmt.Println("You entered:", num)
+
+
+    // reading line of input 
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter a line of text: ")
+    userInput, _ := reader.ReadString('\n')
+    fmt.Println("You entered:", userInput)
+
+
+}
+
+
+// Interfacesss 
+
+type shape interface {
+    area() float64
+}
+
+type square struct {
+    length float64
+}
+
+type circle struct {
+    radius float64
+}
+
+func (a circle) area() float64 {
+    return a.radius * a.radius * 3.14
+}
+
+func (a square) area() float64 {
+    return a.length * a.length
+}
+
+func PrintData(s shape) {
+    fmt.Printf("%T\t%v\n", s, s.area())
+}
+
+// empty interface 
+func describe(val interface{}) {  // based on the passed value it dynamically adjust the type 
+	fmt.Printf("Type: %T, Value: %v\n", val, val)
+}
+
+
+func InterFace() {
+    r := circle{ 4 }
+    s := square{ 5 }
+    shapes := []shape{r, s}  // initialising interface with instances of circle and square struct 
+    for _, a := range shapes {
+        PrintData(a)
+    }
+
+    // empty interface 
+    describe(42)
+	describe("Hello, Go!")
+	describe(3.14)
+
+    // type Assertion
+    var interfaceVar interface{} = 42
+    val, ok := interfaceVar.(int)
+    if ok {
+        fmt.Println("Value is an int:", val)
+    } else {
+        fmt.Println("Value is not an int")
+    }
+
+
+    // type swtich
+    switch val := interfaceVar.(type) {
+    case int:
+        fmt.Println("Value is an int:", val)
+    case string:
+        fmt.Println("Value is a string:", val)
+    default:
+        fmt.Println("Value is of an unknown type")
+    }
+    
+
+}
+
+
+
+
 func main() {
     printing()
     variablesAndFunctions()
@@ -186,5 +343,8 @@ func main() {
     sliceMethods()
     stringMethods()
     loops()
-    pointers()
+    pointersMain()
+    structLogics()
+    ReadInput()
+    InterFace()
 }
