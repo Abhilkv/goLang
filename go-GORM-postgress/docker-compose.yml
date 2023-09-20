@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: root_user
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: root_user
+    ports:
+      - "5432:5432"  # Map host port 5432 to container port 5432
+
+  go_app:
+    build:
+      context: .  # Path to your Node.js application code
+    container_name: my_go_app
+    environment:
+      DB_HOST: postgres  # Use the service name of the PostgreSQL container
+      DB_PORT: 5432  # Port where PostgreSQL is running
+      DB_USER: root_user
+      DB_PASSWORD: mysecretpassword
+      DB_NAME: root_user
+      SSLMode: disable
+    ports:
+      - "8080:8080"  # Map host port 80 to container port 80 (adjust if needed)
+
+
+      # to run the application
+       # docker compose build
+      # docker compose up
