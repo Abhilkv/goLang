@@ -23,9 +23,9 @@ services:
       DB_NAME: root_user
       SSLMode: disable
     ports:
-      - "8080:8080"  # Map host port 80 to container port 80 (adjust if needed)
+      - "8080:8080"  # Map host port 80 to container port 80 (adjust if needed)   right=container port, left localhost (actual machine) port
 
 
       # to run the application
-       # docker compose build
+      # docker compose build
       # docker compose up
