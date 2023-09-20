@@ -17,5 +17,6 @@ EXPOSE 8080
 CMD ["./main"]
 
 # build docker image 
+# run postgress image on docker on port 5432 
 # docker build -t go_gorm_postgress .
 # docker run --name my_app_container --link some-postgres-name:postgres_image_name  -p 8080:8080 go_gorm_postgress
