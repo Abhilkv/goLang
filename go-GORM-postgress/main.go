@@ -5,6 +5,7 @@ import (
 	"go-gorm-postgres/controllers"
 	"go-gorm-postgres/models"
 	"go-gorm-postgres/storage"
+	"go-gorm-postgres/middlewares"
 	"log"
 
 	"os"
@@ -47,6 +48,7 @@ func main() {
 	}
 
 	app := fiber.New()
+	app.Use(middlewares.AuthMiddleware)    // will work for the entire application 
 	r := controllers.Repository{DB: db}
 	controllers.SetupRoutes(app, r)
 	app.Listen(":8080")
