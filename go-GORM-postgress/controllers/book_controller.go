@@ -25,13 +25,14 @@ func (r *Repository) CreateBook(context *fiber.Ctx) error {
 	fmt.Println("create")
 	book := Book{}
 
+	// Parse the JSON request body into the 'book' struct
 	err := context.BodyParser(&book) // convert the request to json using the struct book
 
 	if err != nil {
 		context.Status(http.StatusUnprocessableEntity).JSON(
-			&fiber.Map{"message": "request failed"})
-		return err
-	}
+			&fiber.Map{"message": "request failed"}) // Fiber is used to create a pointer to a fiber.Map 
+		return err								// fiber.Map is a type in Fiber used to represent a JSON object or map. It's 
+	}											//  When you pass a pointer to context.JSON(), Fiber can efficiently work with this data and marshal it into a JSON response.
 	err = r.DB.Create(&book).Error
 	if err != nil {
 		context.Status(http.StatusBadRequest).JSON(
@@ -58,6 +59,7 @@ func (r *Repository) GetBooks(context *fiber.Ctx) error {
 	return nil
 }
 
+// GET BOOK BY ID
 func (r *Repository) GetBookById(context *fiber.Ctx) error {
 	bookModels := &models.Books{}
 	id := context.Params("id")
@@ -78,6 +80,7 @@ func (r *Repository) GetBookById(context *fiber.Ctx) error {
 	return nil
 }
 
+//DELETE
 func (r *Repository) DeleteBook(context *fiber.Ctx) error {
 	bookModels := models.Books{}
 	id := context.Params("id")

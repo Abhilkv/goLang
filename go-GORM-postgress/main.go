@@ -44,8 +44,8 @@ func main() {
 
 	err = models.MigrateBooks(db)
 	if err != nil {
-		log.Fatal("Couldn't migrate DB")
-	}
+		log.Fatal("Couldn't migrate DB")   // create or update the database schema for a table corresponding to the Books{} struct
+	}										//  convenient way to ensure that the database schema for the Books table is in sync with the corresponding Go struct.
 
 	app := fiber.New()
 	app.Use(middlewares.AuthMiddleware)    // will work for the entire application 
