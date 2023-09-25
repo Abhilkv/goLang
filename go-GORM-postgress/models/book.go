@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Books struct {
 	ID        uint   `gorm:"primary key;autoIncrement" json:"id"`
@@ -10,7 +14,15 @@ type Books struct {
 	Publisher string `json:"publisher"`
 }
 
+type File struct {
+	ID        string `gorm:"primaryKey"`
+	FileName  string `gorm:"not null"`
+	FileData  []byte `gorm:"type:bytea"`
+	FileType  string `gorm:"not null"`
+	CreatedAt time.Time
+}
+
 func MigrateBooks(db *gorm.DB) error {
-	err := db.AutoMigrate(&Books{})
+	err := db.AutoMigrate(&Books{}, &File{})
 	return err
 }
