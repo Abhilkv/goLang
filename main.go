@@ -7,7 +7,10 @@ import ("fmt"
 "strings"
 "bufio"
  "os"
+ "advanced/advanced"
 )
+
+
 func userMessage(users []string, printer func(string, string)) {
     for _, value := range users { // Use _ to ignore the index
         printer(value, " Welcome") // Add a space before "Welcome"
@@ -259,6 +262,10 @@ func ReadInput() {
 
 }
 
+func AdvancedTopics() {
+    ConcurrencyAGoroutines()
+    WorkerGroup()
+}
 
 
 func main() {
@@ -271,4 +278,5 @@ func main() {
     pointersMain()
     structLogics()
     ReadInput()
+    AdvancedTopics()
 }
